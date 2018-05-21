@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<myStudents>
+	<student id="0">
+		<firstname>Максим</firstname>
+		<secondname>Романович</secondname>
+		<surname>Борисевич</surname>
+		<country>Беларусь</country>
+		<region>Минская</region>
+		<city>Минск</city>
+		<street>Независимости</street>
+		<house>155</house>
+		<housing>2</housing>
+		<flat>105</flat>
+	</student>
+	<student id="1">
+		<firstname>Николай</firstname>
+		<secondname>Родионович</secondname>
+		<surname>Газманов</surname>
+		<country>Россия</country>
+		<region>Мурманская</region>
+		<city>Мурманск</city>
+		<street>Ленина</street>
+		<house>22</house>
+		<housing>5</housing>
+		<flat>8</flat>
+	</student>
+	<student id="2">
+		<firstname>Надежда</firstname>
+		<secondname>Васильевна</secondname>
+		<surname>Шевелёва</surname>
+		<country>Россия</country>
+		<region>Ленинградская</region>
+		<city>Ленинград</city>
+		<street>3-ая строителей</street>
+		<house>25</house>
+		<housing>8</housing>
+		<flat>12</flat>
+	</student>
+	<student id="3">
+		<firstname>Евгений</firstname>
+		<secondname>Михайлович</secondname>
+		<surname>Лукашин</surname>
+		<country>Россия</country>
+		<region>Московская</region>
+		<city>Москва</city>
+		<street>3-ая строителей</street>
+		<house>25</house>
+		<housing>4</housing>
+		<flat>12</flat>
+	</student>
+	<student id="4">
+		<firstname>Ульяна</firstname>
+		<secondname>Романовна </secondname>
+		<surname>Борисевич</surname>
+		<country>Беларусь</country>
+		<region>Минская</region>
+		<city>Минск</city>
+		<street>Независимости</street>
+		<house>155</house>
+		<housing>2</housing>
+		<flat>105</flat>
+	</student>
+	<student id="5">
+		<firstname>Адександр</firstname>
+		<secondname>Сергеевич</secondname>
+		<surname>Пушкин</surname>
+		<country>Россия</country>
+		<region>Ленинградская</region>
+		<city>Ленинград</city>
+		<street>Мойка</street>
+		<house>13</house>
+		<housing>1</housing>
+		<flat>14</flat>
+	</student>
+	<student id="6">
+		<firstname>Лев</firstname>
+		<secondname>Николаевич</secondname>
+		<surname>Толстой</surname>
+		<country>Россия</country>
+		<region>Московская</region>
+		<city>Ясная Поляна</city>
+		<street>Центральная</street>
+		<house>1</house>
+		<housing>2</housing>
+		<flat>1</flat>
+	</student>
+	<student id="7">
+		<firstname>Татьяна</firstname>
+		<secondname>Никитична</secondname>
+		<surname>Толстая</surname>
+		<country>Россия</country>
+		<region>Ленинградская</region>
+		<city>Ленинград</city>
+		<street>Невский</street>
+		<house>44</house>
+		<housing>3</housing>
+		<flat>67</flat>
+	</student>
+	<student id="8">
+		<firstname>Андрей</firstname>
+		<secondname>Сергеевич</secondname>
+		<surname>Анищик</surname>
+		<country>Беларусь</country>
+		<region>Минская</region>
+		<city>Минск</city>
+		<street>Я. Коласа</street>
+		<house>28</house>
+		<housing></housing>
+		<flat>501</flat>
+	</student>
+	<student id="9">
+		<firstname>Артем</firstname>
+		<secondname>Кириллович</secondname>
+		<surname>Борисевич</surname>
+		<country>Беларусь</country>
+		<region>Минская</region>
+		<city>Минск</city>
+		<street>Шафарнянского</street>
+		<house>13</house>
+		<housing>1</housing>
+		<flat>122</flat>
+	</student>
+	<student id="10">
+		<firstname>Светлана</firstname>
+		<secondname>Васильевна</secondname>
+		<surname>Шевелёва</surname>
+		<country>Россия</country>
+		<region>Ленинградская</region>
+		<city>Ленинград</city>
+		<street>2-ая строителей</street>
+		<house>25</house>
+		<housing></housing>
+		<flat>12</flat>
+	</student>
+	<student id="11">
+		<firstname>Михаил</firstname>
+		<secondname>Петрович</secondname>
+		<surname>Лукашин</surname>
+		<country>Россия</country>
+		<region>Московская</region>
+		<city>Москва</city>
+		<street>Новый Арбат</street>
+		<house>23</house>
+		<housing>2</housing>
+		<flat>12</flat>
+	</student>
+	<student id="12">
+		<firstname>Анастасия</firstname>
+		<secondname>Дмитриевна</secondname>
+		<surname>Лемба</surname>
+		<country>Беларусь</country>
+		<region>Минская</region>
+		<city>Минск</city>
+		<street>Я. Коласа</street>
+		<house>28</house>
+		<housing>1</housing>
+		<flat>803</flat>
+	</student>
+	<student id="13">
+		<firstname>Дмитрий</firstname>
+		<secondname>Алексеевич</secondname>
+		<surname>Борисевич</surname>
+		<country>Беларусь</country>
+		<region>Минская</region>
+		<city>Минск</city>
+		<street>Независимости</street>
+		<house>13</house>
+		<housing>1</housing>
+		<flat>172</flat>
+	</student>
+</myStudents>
