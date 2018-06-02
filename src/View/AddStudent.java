@@ -1,7 +1,9 @@
 package View;
 
-import Controller.AddStudentButton;
+import Controller.StudentController;
+import Model.Address;
 import Model.DataBase;
+import Model.Student;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -11,9 +13,8 @@ import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.widgets.Button;
 
 public class AddStudent {
-    Shell addStudentDialog;
 
-    public AddStudent(DataBase dataBase, Display display, TableWithStudents myMainTable) {
+    public AddStudent(Shell shell, StudentController studentController, Display display, TableWithStudents myMainTable) {
 
         RowLayout rowVertLayout = new RowLayout(SWT.VERTICAL);
         RowLayout rowHorLayout = new RowLayout(SWT.HORIZONTAL);
@@ -73,17 +74,16 @@ public class AddStudent {
         okButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                AddStudentButton addStudentButton = new AddStudentButton(dataBase, enterNameText.getText(),enterSecondNameText.getText(),enterSurnameText.getText(), enterCountryText.getText(),enterRegionText.getText(),enterCityText.getText(),enterStreetText.getText(), enterHouseText.getText(),enterHousingText.getText(),enterFlatText.getText());
-                myMainTable.updateTable(myMainTable.getMainTable(), dataBase);
+                Student student = new Student(enterNameText.getText(),enterSecondNameText.getText(),enterSurnameText.getText());
+                studentController.addStudentToDataBase(student);
+                Address address = new Address(enterCountryText.getText(),enterRegionText.getText(),enterCityText.getText(),enterStreetText.getText(), Integer.parseInt(enterHouseText.getText()),enterHousingText.getText(),Integer.parseInt(enterFlatText.getText()));
+                studentController.addAddressToDataBase(address);
+                myMainTable.updateTable(shell, myMainTable.getMainTable(), studentController);
             }
         });
 
         addStudentDialog.setSize(750 , 500 );
         addStudentDialog.open();
-    }
-
-    public Shell getAddStudentDialog() {
-        return addStudentDialog;
     }
 
     public Text createTextField(Composite compositeName, Label labelName, String text, Shell parent, Layout layout) {

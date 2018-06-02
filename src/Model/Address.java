@@ -5,11 +5,11 @@ public class Address {
     String city;
     String region;
     String street;
-    String house;
+    int house;
     String housing;
-    String flat;
+    int flat;
 
-    public Address(String sCountry, String sCity, String sRegion, String sStreet, String sHouse, String sHousing, String sFlat){
+    public Address(String sCountry, String sCity, String sRegion, String sStreet, int sHouse, String sHousing, int sFlat){
         this.country = sCountry;
         this.city = sCity;
         this.region = sRegion;
@@ -35,7 +35,7 @@ public class Address {
         return street;
     }
 
-    public String getHouse() {
+    public int getHouse() {
         return house;
     }
 
@@ -43,7 +43,7 @@ public class Address {
         return housing;
     }
 
-    public String getFlat() {
+    public int getFlat() {
         return flat;
     }
 }

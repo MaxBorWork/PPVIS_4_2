@@ -1,5 +1,6 @@
 package View;
 
+import Controller.StudentController;
 import Model.DataBase;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -9,7 +10,7 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
 public class DeleteStudent {
-    DeleteStudent(DataBase dataBase, Display display, TableWithStudents myMainTable){
+    DeleteStudent(Shell shell, StudentController studentController, Display display, TableWithStudents myMainTable){
         Shell deleteStudentDialog = new Shell(display, SWT.DIALOG_TRIM);
         deleteStudentDialog.setText("Удаление студента");
 
@@ -41,10 +42,10 @@ public class DeleteStudent {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 int colOfFoundStudents = 0;
-                for (int criteriaOneSearchIndex = 0; criteriaOneSearchIndex < dataBase.studentList.size(); criteriaOneSearchIndex++) {
-                    if (searchEnterSurnameForFirstText.getText().equals(dataBase.getStudent(criteriaOneSearchIndex).getSurName()) || searchEnterHouseText.getText().equals(dataBase.getAddress(criteriaOneSearchIndex).getHouse())) {
-                        dataBase.deleteStudent(criteriaOneSearchIndex);
-                        dataBase.deleteAddress(criteriaOneSearchIndex);
+                for (int criteriaOneSearchIndex = 0; criteriaOneSearchIndex < studentController.getStudentListSize(); criteriaOneSearchIndex++) {
+                    if (searchEnterSurnameForFirstText.getText().equals(studentController.getStudentFromDataBase(criteriaOneSearchIndex).getSurName()) || Integer.parseInt(searchEnterHouseText.getText()) == (studentController.getAddressFromDataBase(criteriaOneSearchIndex).getHouse())) {
+                        studentController.deleteStudentFromDataBase(criteriaOneSearchIndex);
+                        studentController.deleteAddressFromDataBase(criteriaOneSearchIndex);
                         colOfFoundStudents++;
                     }
                 }
@@ -52,7 +53,7 @@ public class DeleteStudent {
                     searchErrorMessage.open();
                 }
                 else {
-                    myMainTable.updateTable(myMainTable.getMainTable(), dataBase);
+                    myMainTable.updateTable(shell, myMainTable.getMainTable(), studentController);
                     deletionDoneMessage.setMessage("Было удалено " + colOfFoundStudents + " студентов.");
                     deletionDoneMessage.open();
                 }
@@ -73,10 +74,10 @@ public class DeleteStudent {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 int colOfFoundStudents = 0;
-                for (int criteriaTwoSearchIndex = 0; criteriaTwoSearchIndex < dataBase.studentList.size(); criteriaTwoSearchIndex++) {
-                    if (searchEnterStreetText.getText().equals(dataBase.getAddress(criteriaTwoSearchIndex).getStreet()) || searchEnterFlatText.getText().equals(dataBase.getAddress(criteriaTwoSearchIndex).getFlat())) {
-                        dataBase.deleteStudent(criteriaTwoSearchIndex);
-                        dataBase.deleteAddress(criteriaTwoSearchIndex);
+                for (int criteriaTwoSearchIndex = 0; criteriaTwoSearchIndex < studentController.getStudentListSize(); criteriaTwoSearchIndex++) {
+                    if (searchEnterStreetText.getText().equals(studentController.getAddressFromDataBase(criteriaTwoSearchIndex).getStreet()) || Integer.parseInt(searchEnterFlatText.getText()) == (studentController.getAddressFromDataBase(criteriaTwoSearchIndex).getFlat())) {
+                        studentController.deleteStudentFromDataBase(criteriaTwoSearchIndex);
+                        studentController.deleteAddressFromDataBase(criteriaTwoSearchIndex);
                         colOfFoundStudents++;
                     }
                 }
@@ -84,7 +85,7 @@ public class DeleteStudent {
                     searchErrorMessage.open();
                 }
                 else {
-                    myMainTable.updateTable(myMainTable.getMainTable(), dataBase);
+                    myMainTable.updateTable(shell, myMainTable.getMainTable(), studentController);
                     deletionDoneMessage.setMessage("Было удалено " + colOfFoundStudents + " студентов.");
                     deletionDoneMessage.open();
                 }
@@ -107,13 +108,13 @@ public class DeleteStudent {
             public void widgetSelected(SelectionEvent e) {
                 int colOfFoundStudents = 0;
                 char[] inputArray = searchEnterHouseNumText.getText().toCharArray();
-                for (int criteriaThreeSearchIndex = 0; criteriaThreeSearchIndex < dataBase.studentList.size(); criteriaThreeSearchIndex++) {
-                    char[] dataBaseAddresArray = dataBase.getAddress(criteriaThreeSearchIndex).getHouse().toCharArray();
+                for (int criteriaThreeSearchIndex = 0; criteriaThreeSearchIndex < studentController.getStudentListSize(); criteriaThreeSearchIndex++) {
+                    char[] dataBaseAddresArray = String.valueOf(studentController.getAddressFromDataBase(criteriaThreeSearchIndex).getHouse()).toCharArray();
                     dataBaseAddresArray = SearchStudent.deleteDupls(dataBaseAddresArray);
                     for (char aDataBaseAddresArray : dataBaseAddresArray) {
-                        if (searchEnterSurnameForThreeText.getText().equals(dataBase.getStudent(criteriaThreeSearchIndex).getSurName()) && inputArray[0] == aDataBaseAddresArray) {
-                            dataBase.deleteStudent(criteriaThreeSearchIndex);
-                            dataBase.deleteAddress(criteriaThreeSearchIndex);
+                        if (searchEnterSurnameForThreeText.getText().equals(studentController.getStudentFromDataBase(criteriaThreeSearchIndex).getSurName()) && inputArray[0] == aDataBaseAddresArray) {
+                            studentController.deleteStudentFromDataBase(criteriaThreeSearchIndex);
+                            studentController.deleteAddressFromDataBase(criteriaThreeSearchIndex);
                             colOfFoundStudents++;
                         }
                     }
@@ -122,7 +123,7 @@ public class DeleteStudent {
                     searchErrorMessage.open();
                 }
                 else {
-                    myMainTable.updateTable(myMainTable.getMainTable(), dataBase);
+                    myMainTable.updateTable(shell, myMainTable.getMainTable(), studentController);
                     deletionDoneMessage.setMessage("Было удалено " + colOfFoundStudents + " студентов.");
                     deletionDoneMessage.open();
                 }

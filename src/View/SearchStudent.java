@@ -1,5 +1,6 @@
 package View;
 
+import Controller.StudentController;
 import Model.DataBase;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -11,7 +12,7 @@ public class SearchStudent {
     Shell searchStudentDialog;
     TableWithStudents myMainTableForSearch;
 
-    SearchStudent(DataBase dataBase, Display display){
+    SearchStudent(StudentController studentController, Display display){
         searchStudentDialog = new Shell(display, SWT.DIALOG_TRIM);
         searchStudentDialog.setText("Поиск студента");
 
@@ -20,7 +21,7 @@ public class SearchStudent {
 
         searchStudentDialog.setLayout(rowVertLayout);
 
-        DataBase dataBaseForFound = new DataBase();
+        StudentController studentControllerForFound = new StudentController(new DataBase());
 
         MessageBox searchErrorMessage = new MessageBox(searchStudentDialog, SWT.APPLICATION_MODAL);
         searchErrorMessage.setMessage("Поиск не дал результатов");
@@ -28,8 +29,8 @@ public class SearchStudent {
         MessageBox deletionDoneMessage = new MessageBox(searchStudentDialog, SWT.APPLICATION_MODAL);
 
         myMainTableForSearch = new TableWithStudents();
-        myMainTableForSearch.createTable(searchStudentDialog, dataBaseForFound);
-        myMainTableForSearch.createPaging(searchStudentDialog, dataBaseForFound);
+        myMainTableForSearch.createTable(searchStudentDialog, studentControllerForFound);
+        myMainTableForSearch.createPaging(searchStudentDialog, studentControllerForFound);
 
         Composite chooseCriteria = new Composite(searchStudentDialog, SWT.NONE);
         chooseCriteria.setLayout(rowVertLayout);
@@ -58,26 +59,26 @@ public class SearchStudent {
                     @Override
                     public void widgetSelected(SelectionEvent e) {
                         int colOfFoundStudents = 0;
-                        for (int criteriaOneSearchIndex = 0; criteriaOneSearchIndex < dataBase.studentList.size(); criteriaOneSearchIndex++) {
-                            if (searchEnterSurnameForFirstText.getText().equals(dataBase.getStudent(criteriaOneSearchIndex).getSurName()) && searchEnterHouseText.getText().equals(dataBase.getAddress(criteriaOneSearchIndex).getHouse())) {
-                                dataBaseForFound.addStudent(dataBase.getStudent(criteriaOneSearchIndex));
-                                dataBaseForFound.addAddress(dataBase.getAddress(criteriaOneSearchIndex));
+                        for (int criteriaOneSearchIndex = 0; criteriaOneSearchIndex < studentController.getStudentListSize(); criteriaOneSearchIndex++) {
+                            if (searchEnterSurnameForFirstText.getText().equals(studentController.getStudentFromDataBase(criteriaOneSearchIndex).getSurName()) && Integer.parseInt(searchEnterHouseText.getText()) == (studentController.getAddressFromDataBase(criteriaOneSearchIndex).getHouse())) {
+                                studentControllerForFound.addStudentToDataBase(studentController.getStudentFromDataBase(criteriaOneSearchIndex));
+                                studentControllerForFound.addAddressToDataBase(studentController.getAddressFromDataBase(criteriaOneSearchIndex));
                                 colOfFoundStudents++;
                             }
                         }
-                        if (dataBaseForFound.studentList.size() == 0) {
-                            myMainTableForSearch.updateTable(myMainTableForSearch.getMainTable(), dataBaseForFound);
+                        if (studentControllerForFound.getStudentListSize() == 0) {
+                            myMainTableForSearch.updateTable(searchStudentDialog, myMainTableForSearch.getMainTable(), studentControllerForFound);
                             searchErrorMessage.open();
                         }
-                        else if (dataBaseForFound.studentList.size() <= myMainTableForSearch.getOnPage()){
+                        else if (studentControllerForFound.getStudentListSize() <= myMainTableForSearch.getOnPage()){
                             deletionDoneMessage.setMessage("Было найдено " + colOfFoundStudents + " студентов.");
                             deletionDoneMessage.open();
-                            myMainTableForSearch.updateTable(myMainTableForSearch.getMainTable(), dataBaseForFound);
+                            myMainTableForSearch.updateTable(searchStudentDialog, myMainTableForSearch.getMainTable(), studentControllerForFound);
                         }
-                        else if (dataBaseForFound.studentList.size() > myMainTableForSearch.getOnPage()) {
+                        else if (studentControllerForFound.getStudentListSize() > myMainTableForSearch.getOnPage()) {
                             deletionDoneMessage.setMessage("Было найдено " + colOfFoundStudents + " студентов.");
                             deletionDoneMessage.open();
-                            myMainTableForSearch.updateTableWithPaging(myMainTableForSearch.getOnPage(), myMainTableForSearch.getCurrentPage(), myMainTableForSearch.getMainTable(), dataBaseForFound);
+                            myMainTableForSearch.updateTableWithPaging(searchStudentDialog, myMainTableForSearch.getOnPage(), myMainTableForSearch.getCurrentPage(), myMainTableForSearch.getMainTable(), studentControllerForFound);
                         }
                     }
                 });
@@ -110,26 +111,26 @@ public class SearchStudent {
                     @Override
                     public void widgetSelected(SelectionEvent e) {
                         int colOfFoundStudents = 0;
-                        for (int criteriaTwoSearchIndex = 0; criteriaTwoSearchIndex < dataBase.studentList.size(); criteriaTwoSearchIndex++) {
-                            if (searchEnterStreetText.getText().equals(dataBase.getAddress(criteriaTwoSearchIndex).getStreet()) && searchEnterFlatText.getText().equals(dataBase.getAddress(criteriaTwoSearchIndex).getFlat())) {
-                                dataBaseForFound.addStudent(dataBase.getStudent(criteriaTwoSearchIndex));
-                                dataBaseForFound.addAddress(dataBase.getAddress(criteriaTwoSearchIndex));
+                        for (int criteriaTwoSearchIndex = 0; criteriaTwoSearchIndex < studentController.getStudentListSize(); criteriaTwoSearchIndex++) {
+                            if (searchEnterStreetText.getText().equals(studentController.getAddressFromDataBase(criteriaTwoSearchIndex).getStreet()) && Integer.parseInt(searchEnterFlatText.getText()) == (studentController.getAddressFromDataBase(criteriaTwoSearchIndex).getFlat())) {
+                                studentControllerForFound.addStudentToDataBase(studentController.getStudentFromDataBase(criteriaTwoSearchIndex));
+                                studentControllerForFound.addAddressToDataBase(studentController.getAddressFromDataBase(criteriaTwoSearchIndex));
                                 colOfFoundStudents++;
                             }
                         }
-                        if (dataBaseForFound.studentList.size() == 0) {
-                            myMainTableForSearch.updateTable(myMainTableForSearch.getMainTable(), dataBaseForFound);
+                        if (studentControllerForFound.getStudentListSize() == 0) {
+                            myMainTableForSearch.updateTable(searchStudentDialog, myMainTableForSearch.getMainTable(), studentControllerForFound);
                             searchErrorMessage.open();
                         }
-                        else if (dataBaseForFound.studentList.size() <= myMainTableForSearch.getOnPage()){
+                        else if (studentControllerForFound.getStudentListSize() <= myMainTableForSearch.getOnPage()){
                             deletionDoneMessage.setMessage("Было найдено " + colOfFoundStudents + " студентов.");
                             deletionDoneMessage.open();
-                            myMainTableForSearch.updateTable(myMainTableForSearch.getMainTable(), dataBaseForFound);
+                            myMainTableForSearch.updateTable(searchStudentDialog, myMainTableForSearch.getMainTable(), studentControllerForFound);
                         }
-                        else if (dataBaseForFound.studentList.size() > myMainTableForSearch.getOnPage()) {
+                        else if (studentControllerForFound.getStudentListSize() > myMainTableForSearch.getOnPage()) {
                             deletionDoneMessage.setMessage("Было найдено " + colOfFoundStudents + " студентов.");
                             deletionDoneMessage.open();
-                            myMainTableForSearch.updateTableWithPaging(myMainTableForSearch.getOnPage(), myMainTableForSearch.getCurrentPage(), myMainTableForSearch.getMainTable(), dataBaseForFound);
+                            myMainTableForSearch.updateTableWithPaging(searchStudentDialog, myMainTableForSearch.getOnPage(), myMainTableForSearch.getCurrentPage(), myMainTableForSearch.getMainTable(), studentControllerForFound);
                         }
                     }
                 });
@@ -163,30 +164,30 @@ public class SearchStudent {
                     public void widgetSelected(SelectionEvent e) {
                         int colOfFoundStudents = 0;
                         char[] inputArray = searchEnterHouseNumText.getText().toCharArray();
-                        for (int criteriaThreeSearchIndex = 0; criteriaThreeSearchIndex < dataBase.studentList.size(); criteriaThreeSearchIndex++) {
-                            char[] dataBaseAddresArray = dataBase.getAddress(criteriaThreeSearchIndex).getHouse().toCharArray();
+                        for (int criteriaThreeSearchIndex = 0; criteriaThreeSearchIndex < studentController.getStudentListSize(); criteriaThreeSearchIndex++) {
+                            char[] dataBaseAddresArray = String.valueOf(studentController.getAddressFromDataBase(criteriaThreeSearchIndex).getHouse()).toCharArray();
                             dataBaseAddresArray = deleteDupls(dataBaseAddresArray);
                             for (char aDataBaseAddresArray : dataBaseAddresArray) {
-                                if (searchEnterSurnameForThreeText.getText().equals(dataBase.getStudent(criteriaThreeSearchIndex).getSurName()) && inputArray[0] == aDataBaseAddresArray) {
-                                    dataBaseForFound.addStudent(dataBase.getStudent(criteriaThreeSearchIndex));
-                                    dataBaseForFound.addAddress(dataBase.getAddress(criteriaThreeSearchIndex));
+                                if (searchEnterSurnameForThreeText.getText().equals(studentController.getStudentFromDataBase(criteriaThreeSearchIndex).getSurName()) && inputArray[0] == aDataBaseAddresArray) {
+                                    studentControllerForFound.addStudentToDataBase(studentController.getStudentFromDataBase(criteriaThreeSearchIndex));
+                                    studentControllerForFound.addAddressToDataBase(studentController.getAddressFromDataBase(criteriaThreeSearchIndex));
                                     colOfFoundStudents++;
                                 }
                             }
                         }
-                        if (dataBaseForFound.studentList.size() == 0) {
-                            myMainTableForSearch.updateTable(myMainTableForSearch.getMainTable(), dataBaseForFound);
+                        if (studentControllerForFound.getStudentListSize() == 0) {
+                            myMainTableForSearch.updateTable(searchStudentDialog, myMainTableForSearch.getMainTable(), studentControllerForFound);
                             searchErrorMessage.open();
                         }
-                        else if (dataBaseForFound.studentList.size() <= myMainTableForSearch.getOnPage()){
+                        else if (studentControllerForFound.getStudentListSize() <= myMainTableForSearch.getOnPage()){
                             deletionDoneMessage.setMessage("Было найдено " + colOfFoundStudents + " студентов.");
                             deletionDoneMessage.open();
-                            myMainTableForSearch.updateTable(myMainTableForSearch.getMainTable(), dataBaseForFound);
+                            myMainTableForSearch.updateTable(searchStudentDialog, myMainTableForSearch.getMainTable(), studentControllerForFound);
                         }
-                        else if (dataBaseForFound.studentList.size() > myMainTableForSearch.getOnPage()) {
+                        else if (studentControllerForFound.getStudentListSize() > myMainTableForSearch.getOnPage()) {
                             deletionDoneMessage.setMessage("Было найдено " + colOfFoundStudents + " студентов.");
                             deletionDoneMessage.open();
-                            myMainTableForSearch.updateTableWithPaging(myMainTableForSearch.getOnPage(), myMainTableForSearch.getCurrentPage(), myMainTableForSearch.getMainTable(), dataBaseForFound);
+                            myMainTableForSearch.updateTableWithPaging(searchStudentDialog, myMainTableForSearch.getOnPage(), myMainTableForSearch.getCurrentPage(), myMainTableForSearch.getMainTable(), studentControllerForFound);
                         }
                     }
                 });

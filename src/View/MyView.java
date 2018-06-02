@@ -1,8 +1,8 @@
 package View;
+
+import Controller.StudentController;
 import Controller.WorkWithXML;
-import Model.Address;
 import Model.DataBase;
-import Model.Student;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -11,31 +11,14 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
-import javax.xml.parsers.*;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.*;
-
-import java.io.File;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
 public class MyView {
-    DataBase dataBase = new DataBase();
+    //DataBase dataBase = new DataBase();
     TableWithStudents myMainTable;
     Display display = new Display();
     Shell shell;
     WorkWithXML workWithXML = new WorkWithXML();
 
-    public MyView(){
+    public MyView(StudentController studentController){
         shell = new Shell(display);
         RowLayout rowLayout = new RowLayout(SWT.VERTICAL);
 
@@ -87,78 +70,78 @@ public class MyView {
         deleteStudentItem.setToolTipText("Удаление студента");
 
         myMainTable = new TableWithStudents();
-        myMainTable.createTable(shell, dataBase);
-        myMainTable.createPaging(shell, dataBase);
+        myMainTable.createTable(shell, studentController);
+        myMainTable.createPaging(shell,  studentController);
 
         readItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                workWithXML.readXML(dataBase);
-                myMainTable.updateTableWithPaging(myMainTable.getOnPage(), myMainTable.getCurrentPage(), myMainTable.getMainTable(), dataBase);
+                workWithXML.readXML(shell, studentController);
+                myMainTable.updateTableWithPaging(shell, myMainTable.getOnPage(), myMainTable.getCurrentPage(), myMainTable.getMainTable(),  studentController);
             }
         });
 
         writeItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                workWithXML.writeXML(dataBase);
+                workWithXML.writeXML(studentController);
             }
         });
 
         addItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                AddStudent addStudent = new AddStudent(dataBase, display, myMainTable);
+                AddStudent addStudent = new AddStudent(shell,  studentController, display, myMainTable);
             }
         });
 
         searchItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                SearchStudent searchStudent = new SearchStudent(dataBase, display);
+                SearchStudent searchStudent = new SearchStudent(studentController, display);
             }
         });
 
         deleteItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                DeleteStudent deleteStudent = new DeleteStudent(dataBase, display, myMainTable);
+                DeleteStudent deleteStudent = new DeleteStudent(shell, studentController, display, myMainTable);
             }
         });
 
         readXmlItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                workWithXML.readXML(dataBase);
-                myMainTable.updateTableWithPaging(myMainTable.getOnPage(), myMainTable.getCurrentPage(), myMainTable.getMainTable(), dataBase);
+                workWithXML.readXML(shell, studentController);
+                myMainTable.updateTableWithPaging(shell, myMainTable.getOnPage(), myMainTable.getCurrentPage(), myMainTable.getMainTable(), studentController);
             }
         });
 
         writeXmlItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                workWithXML.writeXML(dataBase);
+                workWithXML.writeXML(studentController);
             }
         });
 
         addStudenItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                AddStudent addStudent = new AddStudent(dataBase, display, myMainTable);
+                AddStudent addStudent = new AddStudent(shell,  studentController, display, myMainTable);
             }
         });
 
         searchStudentItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                SearchStudent searchStudent = new SearchStudent(dataBase, display);
+                SearchStudent searchStudent = new SearchStudent(studentController, display);
             }
         });
 
         deleteStudentItem.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                DeleteStudent deleteStudent = new DeleteStudent(dataBase, display, myMainTable);
+                DeleteStudent deleteStudent = new DeleteStudent(shell,  studentController, display, myMainTable);
             }
         });
 

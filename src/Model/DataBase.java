@@ -1,10 +1,11 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataBase {
-    public ArrayList<Student> studentList = new ArrayList<>();
-    public ArrayList<Address> addressList = new ArrayList<>();
+    public List<Student> studentList = new ArrayList<>();
+    public List<Address> addressList = new ArrayList<>();
 
     public void addStudent(Student student) {
         studentList.add(student);

@@ -3,25 +3,41 @@ package Controller;
 import Model.Address;
 import Model.DataBase;
 import Model.Student;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import org.eclipse.swt.widgets.FileDialog;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+
+import javax.xml.parsers.*;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WorkWithXML {
-    public void readXML(DataBase dataBase) {
+    private static final String[][] FILTERS = {{"Файлы XML (*.xml)" , "*.xml"}};
+    protected static final Level SEVERE = null;
+
+    public void readXML(Shell shell, StudentController studentController) {
+        FileDialog openDialog = new FileDialog(shell, SWT.OPEN);
+        setFilters(openDialog);
+        String fname = openDialog.open();
+
+        if (fname != null)
+            System.out.println (fname);
+
+        if (fname == null)
+            fname = "D:\\JavaProgs\\myStud.xml";
         try {
 
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -47,9 +63,11 @@ public class WorkWithXML {
                 String region = null;
                 String city = null;
                 String street = null;
-                String house = null;
+                String shouse = null;
+                int house = 0;
                 String housing = null;
-                String flat = null;
+                String sflat = null;
+                int flat = 0;
 
                 public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 
@@ -116,7 +134,8 @@ public class WorkWithXML {
                         bstreet = false;
                     }
                     if (bhouse) {
-                        house = new String(ch, start, length);
+                        shouse = new String(ch, start, length);
+                        house = Integer.parseInt(shouse);
                         bhouse = false;
                     }
                     if (bhousing) {
@@ -124,15 +143,16 @@ public class WorkWithXML {
                         bhousing = false;
                     }
                     if (bflat) {
-                        flat = new String(ch, start, length);
+                        sflat = new String(ch, start, length);
+                        flat = Integer.parseInt(sflat);
                         bflat = false;
                     }
 
-                    if (fname != null && secname != null && surname != null && country != null && region != null && city != null && street != null && house != null && housing != null && flat != null) {
+                    if (fname != null && secname != null && surname != null && country != null && region != null && city != null && street != null && house != 0 && housing != null && flat != 0) {
                         Student student = new Student(fname, secname,surname);
-                        dataBase.addStudent(student);
+                        studentController.addStudentToDataBase(student);
                         Address address = new Address(country, city, region, street, house, housing, flat);
-                        dataBase.addAddress(address);
+                        studentController.addAddressToDataBase(address);
                         fname = null;
                         secname = null;
                         surname = null;
@@ -140,22 +160,24 @@ public class WorkWithXML {
                         region = null;
                         city = null;
                         street = null;
-                        house = null;
+                        house = 0;
                         housing = null;
-                        flat = null;
+                        flat = 0;
                     }
 
                 }
             };
 
-            saxParser.parse("myStud.xml", handler);
+            saxParser.parse(fname, handler);
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (ParserConfigurationException | SAXException
+                | IOException ex) {
+            Logger.getLogger(WorkWithXML.class.getName())
+                    .log(WorkWithXML.SEVERE, null, ex);
         }
     }
 
-    public void writeXML(DataBase dataBase) {
+    public void writeXML(StudentController studentController) {
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -164,7 +186,7 @@ public class WorkWithXML {
             Element root = document.createElement("myStudents");
             document.appendChild(root);
 
-            for (int i = 0; i < dataBase.studentList.size(); i++) {
+            for (int i = 0; i < studentController.getStudentListSize(); i++) {
 
                 Element student = document.createElement("student");
                 root.appendChild(student);
@@ -174,43 +196,43 @@ public class WorkWithXML {
                 student.setAttributeNode(attr);
 
                 Element firstname = document.createElement("firstname");
-                firstname.setTextContent(dataBase.getStudent(i).getFirstName());
+                firstname.setTextContent(studentController.getStudentFromDataBase(i).getFirstName());
                 student.appendChild(firstname);
 
                 Element secname = document.createElement("secondname");
-                secname.setTextContent(dataBase.getStudent(i).getSecondName());
+                secname.setTextContent(studentController.getStudentFromDataBase(i).getSecondName());
                 student.appendChild(secname);
 
                 Element surname = document.createElement("surname");
-                surname.setTextContent(dataBase.getStudent(i).getSurName());
+                surname.setTextContent(studentController.getStudentFromDataBase(i).getSurName());
                 student.appendChild(surname);
 
                 Element country = document.createElement("country");
-                country.setTextContent(dataBase.getAddress(i).getCountry());
+                country.setTextContent(studentController.getAddressFromDataBase(i).getCountry());
                 student.appendChild(country);
 
                 Element region = document.createElement("region");
-                region.setTextContent(dataBase.getAddress(i).getRegion());
+                region.setTextContent(studentController.getAddressFromDataBase(i).getRegion());
                 student.appendChild(region);
 
                 Element city = document.createElement("city");
-                city.setTextContent(dataBase.getAddress(i).getCity());
+                city.setTextContent(studentController.getAddressFromDataBase(i).getCity());
                 student.appendChild(city);
 
                 Element street = document.createElement("street");
-                street.setTextContent(dataBase.getAddress(i).getStreet());
+                street.setTextContent(studentController.getAddressFromDataBase(i).getStreet());
                 student.appendChild(street);
 
                 Element house = document.createElement("house");
-                house.setTextContent(dataBase.getAddress(i).getHouse());
+                house.setTextContent(String.valueOf(studentController.getAddressFromDataBase(i).getHouse()));
                 student.appendChild(house);
 
                 Element housing = document.createElement("housing");
-                housing.setTextContent(dataBase.getAddress(i).getHousing());
+                housing.setTextContent(studentController.getAddressFromDataBase(i).getHousing());
                 student.appendChild(housing);
 
                 Element flat = document.createElement("flat");
-                flat.setTextContent(dataBase.getAddress(i).getFlat());
+                flat.setTextContent(String.valueOf(studentController.getAddressFromDataBase(i).getFlat()));
                 student.appendChild(flat);
             }
 
@@ -223,5 +245,17 @@ public class WorkWithXML {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private  void setFilters(FileDialog dialog)
+    {
+        String[] names = new String[FILTERS.length];
+        String[] exts  = new String[FILTERS.length];
+        for (int i = 0; i < FILTERS.length; i++) {
+            names[i] = FILTERS[i][0];
+            exts [i] = FILTERS[i][1];
+        }
+        dialog.setFilterNames(names);
+        dialog.setFilterExtensions(exts);
     }
 }
