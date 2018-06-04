@@ -12,11 +12,10 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
 public class MyView {
-    //DataBase dataBase = new DataBase();
-    TableWithStudents myMainTable;
-    Display display = new Display();
-    Shell shell;
-    WorkWithXML workWithXML = new WorkWithXML();
+    private TableWithStudents myMainTable;
+    private Display display = new Display();
+    private Shell shell;
+    private WorkWithXML workWithXML = new WorkWithXML();
 
     public MyView(StudentController studentController){
         shell = new Shell(display);
@@ -71,6 +70,10 @@ public class MyView {
 
         myMainTable = new TableWithStudents();
         myMainTable.createTable(shell, studentController);
+
+        Label studentsOnPage = new Label(shell, SWT.NONE);
+        Label colOfPages = new Label(shell, SWT.NONE);
+
         myMainTable.createPaging(shell,  studentController);
 
         readItem.addSelectionListener(new SelectionAdapter() {

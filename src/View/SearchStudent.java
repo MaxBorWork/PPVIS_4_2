@@ -9,8 +9,8 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
 public class SearchStudent {
-    Shell searchStudentDialog;
-    TableWithStudents myMainTableForSearch;
+    private Shell searchStudentDialog;
+    private TableWithStudents myMainTableForSearch;
 
     SearchStudent(StudentController studentController, Display display){
         searchStudentDialog = new Shell(display, SWT.DIALOG_TRIM);

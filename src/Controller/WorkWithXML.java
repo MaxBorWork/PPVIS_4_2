@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 
 public class WorkWithXML {
     private static final String[][] FILTERS = {{"Файлы XML (*.xml)" , "*.xml"}};
-    protected static final Level SEVERE = null;
+    private static final Level SEVERE = null;
 
     public void readXML(Shell shell, StudentController studentController) {
         FileDialog openDialog = new FileDialog(shell, SWT.OPEN);

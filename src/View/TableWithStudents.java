@@ -86,15 +86,24 @@ public class TableWithStudents {
         chooseStudOnPageCombo.add("30", 2);
         chooseStudOnPageCombo.add("50", 3);
 
-        Composite infoAboutCol = new Composite(pagingComposite, SWT.NONE);
+        Composite infoAboutCol = new Composite(shell, SWT.NONE);
         RowLayout rowLayout = new RowLayout(SWT.VERTICAL);
+        GridLayout gridLayout1 = new GridLayout();
+        gridLayout1.numColumns = 2;
         infoAboutCol.setLayout(rowLayout);
+        infoAboutCol.setBounds(10, 10, 600, 100);
+        //infoAboutCol.setSize(600, 50);
 
         Label studentsOnPage = new Label(infoAboutCol, SWT.NONE);
-        studentsOnPage.setText("Записи " + onPage*(currentPage-1) + " - " + (onPage*currentPage) + " из " + studentController.getAddressListSize());
+        //studentsOnPage.setSize(300, 50);
+        studentsOnPage.setBounds(10,10,600, 100);
+        studentsOnPage.setText("Зап. " + onPage*(currentPage-1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
+        //studentsOnPage.pack();
 
         Label colOfPages = new Label(infoAboutCol, SWT.NONE);
+        colOfPages.setSize(600, 50);
         colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
+        colOfPages.pack();
 
         chooseStudOnPageCombo.addSelectionListener(new SelectionAdapter() {
             @Override
@@ -104,6 +113,7 @@ public class TableWithStudents {
                     if (studentController.getStudentListSize() >= onPage)
                         updateTableWithPaging(shell, onPage, currentPage, mainTable, studentController);
                     else updateTable(shell, mainTable, studentController);
+                    studentsOnPage.setText("Зап. " + onPage*(currentPage-1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                     colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
                 }
                 else if (chooseStudOnPageCombo.getSelectionIndex() == 2) {
@@ -111,6 +121,7 @@ public class TableWithStudents {
                     if (studentController.getStudentListSize() >= onPage)
                         updateTableWithPaging(shell, onPage, currentPage, mainTable, studentController);
                     else updateTable(shell, mainTable, studentController);
+                    studentsOnPage.setText("Зап. " + onPage*(currentPage-1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                     colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
                 }
 
@@ -119,6 +130,7 @@ public class TableWithStudents {
                     if (studentController.getStudentListSize() >= onPage)
                         updateTableWithPaging(shell, onPage, currentPage, mainTable, studentController);
                     else updateTable(shell, mainTable, studentController);
+                    studentsOnPage.setText("Зап. " + onPage*(currentPage-1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                     colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
                 }
                 else {
@@ -126,6 +138,7 @@ public class TableWithStudents {
                     if (studentController.getStudentListSize() >= onPage)
                         updateTableWithPaging(shell, onPage, currentPage, mainTable, studentController);
                     else updateTable(shell, mainTable, studentController);
+                    studentsOnPage.setText("Зап. " + onPage*(currentPage-1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                     colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
                 }
             }
@@ -137,9 +150,9 @@ public class TableWithStudents {
                 currentPage = 1;
                 updateTableWithPaging(shell, onPage, currentPage, mainTable, studentController);
                 if (studentController.getAddressListSize() < onPage)
-                    studentsOnPage.setText("Записи " + (onPage*(currentPage-1)+1) + " - " + studentController.getAddressListSize() + " из " + studentController.getAddressListSize());
+                    studentsOnPage.setText("Записи " + (onPage*(currentPage-1)+1) + "-" + studentController.getAddressListSize() + " из " + studentController.getAddressListSize());
                 else
-                    studentsOnPage.setText("Записи " + (onPage*(currentPage-1)+1) + " - " + (onPage*currentPage) + " из " + studentController.getAddressListSize());
+                    studentsOnPage.setText("Зап. " + (onPage*(currentPage-1)+1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                 colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
             }
         });
@@ -150,13 +163,13 @@ public class TableWithStudents {
                 if (currentPage > 2) {
                     currentPage--;
                     updateTableWithPaging(shell, onPage, currentPage, mainTable, studentController);
-                    studentsOnPage.setText("Записи " + onPage*(currentPage-1) + " - " + (onPage*currentPage) + " из " + studentController.getAddressListSize());
+                    studentsOnPage.setText("Зап. " + onPage*(currentPage-1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                     colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
                 }
                 else if (currentPage == 2) {
                     currentPage--;
                     updateTableWithPaging(shell, onPage, currentPage, mainTable, studentController);
-                    studentsOnPage.setText("Записи " + (onPage*(currentPage-1)+1) + " - " + (onPage*currentPage) + " из " + studentController.getAddressListSize());
+                    studentsOnPage.setText("Зап. " + (onPage*(currentPage-1)+1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                     colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
                 }
             }
@@ -168,13 +181,13 @@ public class TableWithStudents {
                 if (currentPage < (numPages(studentController, onPage) - 1)) {
                     currentPage++;
                     updateTableWithPaging(shell, onPage, currentPage, mainTable, studentController);
-                    studentsOnPage.setText("Записи " + onPage*(currentPage-1) + " - " + (onPage*currentPage) + " из " + studentController.getAddressListSize());
+                    studentsOnPage.setText("Зап. " + onPage*(currentPage-1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                     colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
                 }
                 else if (currentPage == (numPages(studentController, onPage) - 1)) {
                     currentPage++;
                     updateTableWithPagingLastPage(shell, onPage, currentPage, mainTable, studentController);
-                    studentsOnPage.setText("Записи " + onPage*(currentPage-1) + " - " + (onPage*currentPage) + " из " + studentController.getAddressListSize());
+                    studentsOnPage.setText("Зап. " + onPage*(currentPage-1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                     colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
                 }
             }
@@ -185,7 +198,7 @@ public class TableWithStudents {
             public void widgetSelected(SelectionEvent e) {
                 currentPage = numPages(studentController, onPage);
                 updateTableWithPagingLastPage(shell, onPage, currentPage, mainTable, studentController);
-                studentsOnPage.setText("Записи " + onPage*(currentPage-1) + " - " + (onPage*currentPage) + " из " + studentController.getAddressListSize());
+                studentsOnPage.setText("Записи " + onPage*(currentPage-1) + "-" + (onPage*currentPage) + " из " + studentController.getAddressListSize());
                 colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
             }
         });
@@ -204,7 +217,7 @@ public class TableWithStudents {
             item.setText(6, studentController.getAddressFromDataBase(addressIndex).getHousing());
             item.setText(7, String.valueOf(studentController.getAddressFromDataBase(addressIndex).getFlat()));
         }
-        createPaging(shell, studentController);
+        //createPaging(shell, studentController);
     }
 
     public void updateTableWithPaging(Shell shell, int onPage, int curPage, Table mainTable, StudentController studentController) {
@@ -220,7 +233,7 @@ public class TableWithStudents {
             item.setText(6, studentController.getAddressFromDataBase(addressIndex).getHousing());
             item.setText(7, String.valueOf(studentController.getAddressFromDataBase(addressIndex).getFlat()));
         }
-        createPaging(shell, studentController);
+        //createPaging(shell, studentController);
     }
 
     private void updateTableWithPagingLastPage(Shell shell, int onPage, int curPage, Table mainTable, StudentController studentController) {
@@ -236,7 +249,7 @@ public class TableWithStudents {
             item.setText(6, studentController.getAddressFromDataBase(addressIndex).getHousing());
             item.setText(7, String.valueOf(studentController.getAddressFromDataBase(addressIndex).getFlat()));
         }
-        createPaging(shell, studentController);
+        //createPaging(shell, studentController);
     }
 
     private int numPages(StudentController studentController, int studentsOnPage){
@@ -253,5 +266,10 @@ public class TableWithStudents {
 
     public int getCurrentPage() {
         return currentPage;
+    }
+
+    public void changeLabelText(Label studentsOnPage, Label colOfPages, StudentController studentController) {
+        studentsOnPage.setText("Записи " + onPage*(currentPage-1) + " - " + (onPage*currentPage) + " из " + studentController.getAddressListSize());
+        colOfPages.setText("Страница " + currentPage + " из " + numPages(studentController, onPage));
     }
 }

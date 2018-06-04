@@ -168,4 +168,184 @@
 		<housing>1</housing>
 		<flat>172</flat>
 	</student>
+	<student id="14">
+		<firstname>Дмитрий</firstname>
+		<secondname>Петрович</secondname>
+		<surname>Романов</surname>
+		<country>Россия</country>
+		<region>Минская</region>
+		<city>Минск</city>
+		<street>Победителей</street>
+		<house>143</house>
+		<housing>5а</housing>
+		<flat>72</flat>
+	</student>
+	<student id="15">
+		<firstname>Филипп</firstname>
+		<secondname>Бедросович</secondname>
+		<surname>Киркоров</surname>
+		<country>Россия</country>
+		<region>Московская</region>
+		<city>Москва</city>
+		<street>Арбат</street>
+		<house>24</house>
+		<housing>2</housing>
+		<flat>64</flat>
+	</student>
+	<student id="16">
+		<firstname>Дарья</firstname>
+		<secondname>Юрьевна</secondname>
+		<surname>Волах</surname>
+		<country>Беларусь</country>
+		<region>Минская</region>
+		<city>Минск</city>
+		<street>Казинца</street>
+		<house>33</house>
+		<housing></housing>
+		<flat>85</flat>
+	</student>
+	<student id="17">
+		<firstname>Владислав</firstname>
+		<secondname>Сергеевич</secondname>
+		<surname>Поляков</surname>
+		<country>Беларусь</country>
+		<region>Минская</region>
+		<city>Минск</city>
+		<street>Якуба Коласа</street>
+		<house>28</house>
+		<housing>1</housing>
+		<flat>602</flat>
+	</student>
+	<student id="18">
+		<firstname>Максим</firstname>
+		<secondname>Максимович</secondname>
+		<surname>Максимов</surname>
+		<country>Украина</country>
+		<region>Киевская</region>
+		<city>Задвиженск</city>
+		<street>Костюшко</street>
+		<house>111</house>
+		<housing>3б</housing>
+		<flat>229</flat>
+	</student>
+	<student id="19">
+		<firstname>Дмитрий</firstname>
+		<secondname>Павлович</secondname>
+		<surname>Донской</surname>
+		<country>Россия</country>
+		<region>Новгородская</region>
+		<city>Новгород</city>
+		<street>Крещения</street>
+		<house>1</house>
+		<housing></housing>
+		<flat>2</flat>
+	</student>
+	<student id="20">
+		<firstname>Герман</firstname>
+		<secondname>Вольфович</secondname>
+		<surname>Геринг</surname>
+		<country>Германия</country>
+		<region>Рурская</region>
+		<city>Рур</city>
+		<street>3-го Рейха</street>
+		<house>228</house>
+		<housing>13</housing>
+		<flat>47</flat>
+	</student>
+	<student id="21">
+		<firstname>Иосиф</firstname>
+		<secondname>Виссарионович</secondname>
+		<surname>Сталин</surname>
+		<country>Грузинская ССР</country>
+		<region>Сухумская</region>
+		<city>Сухуми</city>
+		<street>Аджарская</street>
+		<house>135</house>
+		<housing>5</housing>
+		<flat>55</flat>
+	</student>
+	<student id="22">
+		<firstname>Владимир</firstname>
+		<secondname>Владимирович</secondname>
+		<surname>Путин</surname>
+		<country>Россия</country>
+		<region>Питерский</region>
+		<city>Санкт-Петербург</city>
+		<street>Невский</street>
+		<house>3</house>
+		<housing>1</housing>
+		<flat>5</flat>
+	</student>
+	<student id="23">
+		<firstname>Владимир</firstname>
+		<secondname>Ильич</secondname>
+		<surname>Ульянов</surname>
+		<country>Россия</country>
+		<region>Ульяновская</region>
+		<city>Ульяновск</city>
+		<street>Октября</street>
+		<house>7</house>
+		<housing>11</housing>
+		<flat>1917</flat>
+	</student>
+	<student id="24">
+		<firstname>Илья</firstname>
+		<secondname>Иванович</secondname>
+		<surname>Репин</surname>
+		<country>Россия</country>
+		<region>Крымская</region>
+		<city>Ялта</city>
+		<street>Абрикосовая</street>
+		<house>31</house>
+		<housing>2</housing>
+		<flat>99</flat>
+	</student>
+	<student id="25">
+		<firstname>Иван</firstname>
+		<secondname>Петрович</secondname>
+		<surname>Сидоров</surname>
+		<country>Казахстан</country>
+		<region>Астанинская</region>
+		<city>Астана</city>
+		<street>Независимости</street>
+		<house>37</house>
+		<housing>3</housing>
+		<flat>367</flat>
+	</student>
+	<student id="26">
+		<firstname>Гай</firstname>
+		<secondname>Юлий</secondname>
+		<surname>Цезарь</surname>
+		<country>Римская империя</country>
+		<region>Римская</region>
+		<city>Рим</city>
+		<street>Императорская</street>
+		<house>1</house>
+		<housing></housing>
+		<flat>1</flat>
+	</student>
+	<student id="27">
+		<firstname>Брут</firstname>
+		<secondname>Юлиевич</secondname>
+		<surname>Цезарь</surname>
+		<country>Римская империя</country>
+		<region>Римская</region>
+		<city>Рим</city>
+		<street>Императорская</street>
+		<house>1</house>
+		<housing></housing>
+		<flat>2</flat>
+	</student>
+	<student id="28">
+		<firstname>Василий</firstname>
+		<secondname>Александрович</secondname>
+		<surname>Теркин</surname>
+		<country>Россия</country>
+		<region>Уст-Истинская</region>
+		<city>Чита</city>
+		<street>Машерова</street>
+		<house>11</house>
+		<housing>5</housing>
+		<flat>512</flat>
+	</student>
 </myStudents>
